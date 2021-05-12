@@ -25,6 +25,7 @@ function fetchAllToys() {
 }
 
 function renderCards(toysArray) {
+  // debugger;
   toysArray.forEach(function (obj) {
     const newDiv = document.createElement('div')
     newDiv.className = "card"
@@ -54,7 +55,7 @@ function renderCards(toysArray) {
     event.preventDefault()
     const inputObj = {
       name: event.target[0].value,
-      url: event.target[1].value,
+      image: event.target[1].value,
       likes: 0
     };
 
@@ -68,15 +69,15 @@ function renderCards(toysArray) {
 
       body: JSON.stringify(inputObj)
     }
-    return fetch("http://localhost:3000/toys", configurationObject)
+    fetch("http://localhost:3000/toys", configurationObject)
       .then(resp => resp.json())
-      .then(data => renderCards(data))
+      .then(data => renderCards([data]))
       .catch(function (error) {
         const alertMessage = error.message
         document.body.innerHTML = alertMessage
     })
   });
-
+  
 };
 
 // const h2 = document.createElement('h2')
